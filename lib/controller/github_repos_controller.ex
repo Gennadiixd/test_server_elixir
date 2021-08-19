@@ -22,15 +22,15 @@ defmodule GitHubReposController do
   end
 
   def get_repos(user) do
-    # response = HTTPoison.get!("https://api.github.com/users/#{user}/repos")
+    response = HTTPoison.get!("https://api.github.com/users/#{user}/repos")
 
-    # response.body
-    # |> Poison.decode!()
-    # |> Enum.map(fn repo -> {get_name(repo), get_id(repo)} end)
+    response.body
+    |> Poison.decode!()
+    |> Enum.map(fn repo -> %{get_name(repo) => get_id(repo)} end)
     # |> Enum.map(fn repo -> Tuple.to_list(repo) end)
-    # |> Poison.encode!()
-
-    %{"user" => "1"}
     |> Poison.encode!()
+
+    # [%{"user" => "1"}]
+    # |> Poison.encode!()
   end
 end
